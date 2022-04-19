@@ -12,16 +12,18 @@ TOKEN = os.getenv("INFLUX_TOKEN")
 ORG = "fairplay89@gmail.com"
 BUCKET = "system-metrics"
 
+
 async def get_bytes(t, iface='wlan0'):
-    with open('/sys/class/net/' + iface + '/statistics/' + t + '_bytes', 'r') as f:
+    with open('/sys/class/net/' + iface + '/statistics/' + t + '_bytes', 'r') as f: # noqa
         data = f.read()
         return int(data)
+
 
 async def main():
     client = InfluxDBClient(url=HOST, token=TOKEN, org=ORG)
     write_api = client.write_api(write_options=SYNCHRONOUS)
-    
-    while True:      
+
+    while True:
         # Collect stats
         tx1 = await get_bytes('tx')
         rx1 = await get_bytes('rx')
@@ -35,20 +37,20 @@ async def main():
         rx_speed = round((rx2 - rx1)/1000000.0, 4)
 
         if DEBUG:
-          os.system('clear||cls')
-          print("-- Netmon --")
-          print("")
-          # NET
-          print("tx_speed", tx_speed)
-          print("rx_speed", rx_speed)
-          print("")
+            os.system('clear||cls')
+            print("-- Netmon --")
+            print("")
+            # NET
+            print("tx_speed", tx_speed)
+            print("rx_speed", rx_speed)
+            print("")
 
         # Write data to InfluxDB
         POINT = Point("system-metrics") \
-                .tag("device", DEVICE) \
-                .field("tx_speed", tx_speed) \
-                .field("rx_speed", rx_speed) \
-                .time(datetime.utcnow(), WritePrecision.NS)
+            .tag("device", DEVICE) \
+            .field("tx_speed", tx_speed) \
+            .field("rx_speed", rx_speed) \
+            .time(datetime.utcnow(), WritePrecision.NS)
         write_api.write(bucket=BUCKET, record=POINT)
 
 if __name__ == "__main__":
