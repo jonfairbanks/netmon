@@ -5,12 +5,12 @@ from datetime import datetime
 from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 
-DEVICE = "pi-zero-w2"
-DEBUG = os.getenv("DEBUG")
-HOST = "https://us-central1-1.gcp.cloud2.influxdata.com"
+DEBUG = os.getenv("DEBUG", False)
+DEVICE = os.getenv("DEVICE", "My Device")
+HOST = os.getenv("INFLUX_HOST", "https://us-central1-1.gcp.cloud2.influxdata.com") # noqa
 TOKEN = os.getenv("INFLUX_TOKEN")
-ORG = "fairplay89@gmail.com"
-BUCKET = "system-metrics"
+ORG = os.getenv("INFLUX_ORG")
+BUCKET = os.getenv("INFLUX_BUCKET", "system-metrics")
 
 
 async def get_bytes(t, iface='wlan0'):
