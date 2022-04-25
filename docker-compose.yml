@@ -7,6 +7,5 @@ services:
       - INFLUX_TOKEN=abcdef123==
       - INFLUX_ORG=MyInfluxOrg
       - INFLUX_BUCKET=MyInfluxBucket
-      - PLUG=1.2.3.4
     volumes:
       - /sys/:/sys/:ro
