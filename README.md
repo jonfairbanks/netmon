@@ -22,6 +22,7 @@ Additional supported env variables include:
 - DEBUG: Enable or disable in-app debug logging (Default: `False`)
 - DEVICE: Preferred name for this device (Default: `My Device`)
 - INFLUX_HOST: Host of the Influx Cloud bucket (Default: `https://us-central1-1.gcp.cloud2.influxdata.com`)
+- INTERFACE: Network interface to monitor (Default: `wlan0`)
 
 ### Launch
 

@@ -11,9 +11,10 @@ HOST = os.getenv("INFLUX_HOST", "https://us-central1-1.gcp.cloud2.influxdata.com
 TOKEN = os.getenv("INFLUX_TOKEN")
 ORG = os.getenv("INFLUX_ORG")
 BUCKET = os.getenv("INFLUX_BUCKET", "system-metrics")
+INTERFACE = os.getenv("INTERFACE", "wlan0")
 
 
-async def get_bytes(t, iface='wlan0'):
+async def get_bytes(t, iface=INTERFACE):
     with open('/sys/class/net/' + iface + '/statistics/' + t + '_bytes', 'r') as f: # noqa
         data = f.read()
         return int(data)
