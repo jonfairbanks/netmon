@@ -18,7 +18,7 @@ RUN pip install --user pipenv
 ENV PATH="/home/python/.local/bin:${PATH}"
 
 COPY --chown=python:python Pipfile Pipfile
-RUN pipenv lock -r > requirements.txt
+RUN pipenv requirements -i https://pypi.org/simple > requirements.txt
 RUN pip install --user -r requirements.txt
 
 COPY --chown=python:python . .
