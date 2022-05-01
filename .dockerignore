@@ -13,3 +13,6 @@ logo.*
 *.svg
 *.sample
 .env*
+Dockerfile
+docker-compose.yml
+dashboard/
