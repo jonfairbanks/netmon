@@ -16,3 +16,5 @@ logo.*
 Dockerfile
 docker-compose.yml
 dashboard/
+.venv
+__pycache__
